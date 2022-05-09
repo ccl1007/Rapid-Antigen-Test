@@ -42,7 +42,8 @@ let markers = new L.MarkerClusterGroup().addTo(map);
 let data = [];
 
 axios
-  .get("https://kiang.github.io/data.nhi.gov.tw/antigen.json")
+  .get("https://raw.githubusercontent.com/SiongSng/Rapid-Antigen-Test-Taiwan-Map/data/data/antigen_open_street_map.json"
+  )
   .then((res) => {
     data = res.data.features;
     console.log(data);
@@ -53,14 +54,14 @@ axios
           { icon: greenIcon }
         )
           .bindPopup(`<p><strong style="font-size: 20px;">${data[i].properties.name}</strong></p>
-       <span>品牌: ${data[i].properties.brand}</br>
+       <span>品牌: ${data[i].properties.brands}</br>
       <strong style="font-size: 16px;">剩餘 
       ${data[i].properties.count} 份 (每份五個)
       </strong><br>
       地址: ${data[i].properties.address}<br>
       電話: ${data[i].properties.phone}<br>
       備註: ${data[i].properties.note}<br>
-      <small>最後更新時間: ${data[i].properties.updated}</small></span>`)
+      <small>最後更新時間: ${data[i].properties.updated_at}</small></span>`)
       );
     }
   });
